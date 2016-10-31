@@ -2,7 +2,7 @@ var mosca = require('mosca')
  
 var pubsubsettings = {
       type: 'mongo',
-      url: 'mongodb://ed:mice@139.59.172.240:27017/Measurements',
+      url: 'mongodb://localhost:27017/Measurements',
       pubsubCollection: 'Hflux',
       mongo: {}
 };
