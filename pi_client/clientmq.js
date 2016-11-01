@@ -1,4 +1,5 @@
 var mqtt = require('mqtt')
+var uuid = require('node-uuid');
 const exec = require('child_process').exec;
 var counter = 1;
 
@@ -12,36 +13,53 @@ client.on('error', function (error) {
     console.log('in errorrrrr er :::' + error);
 })
 
-function getReading(callback) {
+function getBmp180Reading(callback) {
     var reading;
     exec('python /home/pi/projects/mqtt_client/bmp180.py', (error, stdout, stderr) => {
         if (error) {
             return callback(error);
         }
         reading = `${stdout}`;
-        callback(null, reading);
+        var obj = JSON.parse(reading);
+        var objason = { 
+            createdAt : Date.now(), 
+            id : uuid.v4(), 
+            ip : "piserial#", 
+            ok : true, 
+            sensor : "Bmp180", 
+            temp : obj.temp,
+            pressure : obj.pressure
+        } 
+        callback(null, reading, "Bmp180");
     });
 }
 
-function handleResult(err, result) {
+function getHfluxReading(callback) {
+    var reading;
+    exec('python /home/pi/projects/mqtt_client/bmp180.py', (error, stdout, stderr) => {
+        if (error) {
+            return callback(error);
+        }
+        reading = `${stdout}`;
+        var obj = JSON.parse(reading);
+        var objason = { 
+            createdAt : Date.now(), 
+            id : uuid.v4(), 
+            ip : "piserial#", 
+            ok : true, 
+            sensor : "Hflux", 
+            val : 34.34
+        } 
+        callback(null, reading, "Hflux");
+    });
+}
+
+function handleResult(err, result, collection) {
     if (err) {
         console.error(err.stack || err.message);
         return;
     }
-    var obj = JSON.parse(result);
-    var jjs = { 
-        createdAt : "\/Date(1476047352624)\/", 
-        id : "jjjjjjjj", 
-        ip : "vvvxx", 
-        ok : "si, ok", 
-        sensor : "Hflux", 
-        value : 333.3
-    }
-    client.publish('Hflux', JSON.stringify(jjs));
-    //client.publish('Hflux', Json.stringify(jjs), { qos: 0, retain: false}, function() {
-    //});    
-    //client.publish('altitude', obj.altitude.toString());
-    //client.publish('temp', obj.temp.toString());
+    client.publish(collection, JSON.stringify(result));
     console.log('reading #' + counter);
 }
 
@@ -50,7 +68,7 @@ function getresp(err, result){
 }
 
 setInterval(function(){
-    getReading(handleResult);
+    getBmp180Reading(handleResult);
     counter++;
 }, 1* 1000);
 
