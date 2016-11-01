@@ -34,16 +34,21 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-    if(packet.topic === "Hflux"){
-        var collection = db.get('Hflux');   
-        collection.insert(JSON.stringify(packet.payload), function (err, doc) {
-            if (err) {
-                // If it failed, return error
-                console.log("There was a problem adding the information to the database.");
-            }
-        });
-        console.log('Published: ', packet.topic);
-    }
+    switch(expression) {
+        case "Hflux":
+            var collection = db.get('Hflux');   
+            break;
+        case "Bmp180":
+            var collection = db.get('Bmp180');   
+            break;
+    } 
+    collection.insert(JSON.stringify(packet.payload), function (err, doc) {
+        if (err) {
+            // If it failed, return error
+            console.log("There was a problem adding the information to the database.");
+        }
+    });
+    console.log('Published: ', packet.topic);
 });
 
 // fired when a client subscribes to a topic
