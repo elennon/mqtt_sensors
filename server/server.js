@@ -34,7 +34,7 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-    switch(packet.payload) {
+    switch(packet.topic) {
         case "Hflux":
             var collection = db.get('Hflux');   
             break;
