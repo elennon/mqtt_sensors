@@ -1,5 +1,7 @@
 var mosca = require('mosca')
- 
+var monk = require('monk');
+var db = monk('localhost:27017/Measurements');
+
 var pubsubsettings = {
       type: 'mongo',
       url: 'mongodb://localhost:27017/Measurements',
@@ -8,7 +10,7 @@ var pubsubsettings = {
 };
  
 var settings = {
-    port: 1883,
+    port: 1884,
     backend: pubsubsettings
 };
 
@@ -32,9 +34,18 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-    console.log('Published: ', packet.topic);
+    if(packet.topic === "Hflux"){
+        var collection = db.get('Hflux');   
+        collection.insert(JSON.stringify(packet.payload), function (err, doc) {
+            if (err) {
+                // If it failed, return error
+                console.log("There was a problem adding the information to the database.");
+            }
+        });
+        console.log('Published: ', packet.topic);
+    }
 });
- 
+
 // fired when a client subscribes to a topic
 server.on('subscribed', function(topic, client) {
     console.log('subscribed : ', topic);
