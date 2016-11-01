@@ -2,30 +2,28 @@ var mosca = require('mosca')
  
 var pubsubsettings = {
       type: 'mongo',
-      url: 'mongodb://localhost:27017/mqtt',
-      pubsubCollection: 'myCollections',
+      url: 'mongodb://localhost:27017/Measurements',
+      pubsubCollection: 'Hflux',
       mongo: {}
 };
  
 var settings = {
-    port: 1884,
+    port: 1883,
     backend: pubsubsettings
 };
 
 var server = new mosca.Server(settings);
 server.on('ready', setup);
 
-var authenticate = function(client, username, password, callback) {
-    var authorized = (username === 'me' && password.toString() === 'secret');
-    if (authorized) client.user = username;
-        callback(null, authorized);
-}
  
 // fired when the mqtt server is ready
 function setup() {
-    server.authenticate = authenticate;
     console.log('Mosca server is up and running')
 }
+
+server.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
  
 // fired whena  client is connected
 server.on('clientConnected', function(client) {
@@ -42,7 +40,7 @@ server.on('subscribed', function(topic, client) {
     console.log('subscribed : ', topic);
 });
  
-// fired when a client subscribes to a topic
+// fired when a client unsubscribes to a topic
 server.on('unsubscribed', function(topic, client) {
     console.log('unsubscribed : ', topic);
 });
