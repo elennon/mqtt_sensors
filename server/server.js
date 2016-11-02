@@ -5,7 +5,7 @@ var db = monk('localhost:27017/Measurements');
 var pubsubsettings = {
       type: 'mongo',
       url: 'mongodb://localhost:27017/Measurements',
-      pubsubCollection: 'Hflux',
+      pubsubCollection: 'pubsub',
       mongo: {}
 };
  
@@ -34,9 +34,17 @@ server.on('clientConnected', function(client) {
  
 // fired when a message is received
 server.on('published', function(packet, client) {
-    if(packet.topic === "Hflux"){
-        var collection = db.get('Hflux');   
-        collection.insert(JSON.stringify(packet.payload), function (err, doc) {
+    var collection = null;       
+    switch(packet.topic) {
+        case "Hflux":
+            collection = db.get('Hflux');   
+            break;
+        case "Bmp180":
+            collection = db.get('Bmp180');   
+            break;
+    } 
+    if(collection !== null){
+        collection.insert(JSON.parse(packet.payload), function (err, doc) {
             if (err) {
                 // If it failed, return error
                 console.log("There was a problem adding the information to the database.");
