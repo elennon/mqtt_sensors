@@ -44,7 +44,7 @@ server.on('published', function(packet, client) {
             break;
     } 
     if(collection !== null){
-        collection.insert(JSON.stringify(packet.payload), function (err, doc) {
+        collection.insert(JSON.parse(packet.payload), function (err, doc) {
             if (err) {
                 // If it failed, return error
                 console.log("There was a problem adding the information to the database.");
