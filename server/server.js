@@ -5,7 +5,7 @@ var db = monk('localhost:27017/Measurements');
 var pubsubsettings = {
       type: 'mongo',
       url: 'mongodb://localhost:27017/Measurements',
-      pubsubCollection: 'Hflux',
+      pubsubCollection: 'pubsub',
       mongo: {}
 };
  
