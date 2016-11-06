@@ -1,6 +1,9 @@
-function getBmp180Reading(callback) {
+var uuid = require('node-uuid');
+const exec = require('child_process').exec;
+
+module.exports = function getBmp180Reading(callback) {
     var reading;
-    exec('python /home/pi/projects/mqtt_reader/pi_client/scripts/bmp180.py', (error, stdout, stderr) => {
+    exec('python /home/pi/projects/mqtt_reader/pi_reader/scripts/adafruitBmp.py', (error, stdout, stderr) => {
         if (error) {
             return callback(error);
         }
@@ -16,6 +19,7 @@ function getBmp180Reading(callback) {
             temp : obj.temp,
             pressure : obj.pressure
         } 
+        console.log(objason);
         callback(null, objason, "Bmp180");
     });
 }
