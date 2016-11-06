@@ -38,7 +38,7 @@ function sendSdpAvg(callback){
             sensor : "Sdp610", 
             val : getSdpAvg()
         } 
-        callback(null, objason, "Mlx906");
+        callback(null, objason, "Sdp610");
 }
 function getSdpAvg(){
     var sum = 0;

@@ -20,7 +20,7 @@ module.exports = function getMlx906Reading(callback) {
                 skyTemp : obj[1].trim()
             } 
         }
-        //console.log(objason);
+        console.log(objason);
         callback(null, objason, "Mlx906");
     });
 }

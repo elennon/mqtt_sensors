@@ -3,7 +3,7 @@ const exec = require('child_process').exec;
 
 module.exports = function getBmp180Reading(callback) {
     var reading;
-    exec('python /home/pi/projects/mqtt_reader/pi_reader/scripts/adafruitBmp.py', (error, stdout, stderr) => {
+    exec('python /home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py', (error, stdout, stderr) => {
         if (error) {
             return callback(error);
         }
@@ -19,7 +19,7 @@ module.exports = function getBmp180Reading(callback) {
             temp : obj.temp,
             pressure : obj.pressure
         } 
-        console.log(objason);
+        //console.log(objason);
         callback(null, objason, "Bmp180");
     });
 }

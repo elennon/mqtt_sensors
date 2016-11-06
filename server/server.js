@@ -42,6 +42,18 @@ server.on('published', function(packet, client) {
         case "Bmp180":
             collection = db.get('Bmp180');   
             break;
+        case "Mlx906":
+            collection = db.get('Mlx906');   
+            break;
+        case "CavityTemp":
+            collection = db.get('CavityTemp');   
+            break;
+        case "Sht15":
+            collection = db.get('Sht15');   
+            break;
+        case "Sdp610":
+            collection = db.get('Sdp610');   
+            break;
     } 
     if(collection !== null){
         collection.insert(JSON.parse(packet.payload), function (err, doc) {
