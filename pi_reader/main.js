@@ -6,6 +6,7 @@ var cavityTemp = require('./models/cavityTemp.js');
 var mlx906 = require('./models/mlx906.js');
 var sdp610 = require('./models/sdp610.js');
 var sht15 = require('./models/sht15.js');
+var spwn = require('./models/spawnRd.js');
 
 var counter = 1;
 var sdpArray = [];
@@ -15,7 +16,7 @@ var options = {
     clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8)
 };
 var client = mqtt.connect('mqtt://139.59.172.240', options);
-
+console.log('process:-->   ', process.pid);
 function handleResult(err, result, collection) {
     if (err) {
         console.error(err.stack || err.message);
@@ -53,14 +54,15 @@ setInterval(function(){
   }, 1* 2000);
 
 setInterval(function(){
-      bmp180(handleResult);
-      hflux(handleResult);
-      cavityTemp(handleResult);   //need muti readings
-      mlx906(handleResult);
-      sendSdpAvg(handleResult);
-      sht15(handleResult);
+    //   bmp180(handleResult);
+    //   hflux(handleResult);
+    //   cavityTemp(handleResult);   //need muti readings
+    //   mlx906(handleResult);
+    //   sendSdpAvg(handleResult);
+    //   sht15(handleResult);
+    spwn(handleResult);
       counter++;
-  }, 1* 10000);
+  }, 1* 1000);
 
   client.on('error', function (error) {
   console.log('in errorrrrr er :::' + error);
