@@ -54,12 +54,12 @@ setInterval(function(){
   }, 1* 2000);
 
 setInterval(function(){
-    //   bmp180(handleResult);
-    //   hflux(handleResult);
-    //   cavityTemp(handleResult);   //need muti readings
-    //   mlx906(handleResult);
+    //bmp180(handleResult);
+    //hflux(handleResult);
+    //cavityTemp(handleResult);   //need muti readings
+    //mlx906(handleResult);
     //   sendSdpAvg(handleResult);
-    //   sht15(handleResult);
+    sht15(handleResult);
     counter++;
 }, 1* 1000);
 

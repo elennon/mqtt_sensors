@@ -1,13 +1,15 @@
-var uuid = require('node-uuid');
-const exec = require('child_process').exec;
+const uuid = require('node-uuid');
+var sudo = require('sudo');
+var options = {
+    cachePassword: true,
+    prompt: 'mice'
+};
 
 module.exports = function getSht15Reading(callback) {
-    var reading;
-    exec('sudo python /usr/local/bin/sht -v -trd 4 17', (error, stdout, stderr) => {
-        if (error) {
-            return callback(error);
-        }
-        reading = `${stdout}`;      
+    let reading;
+    var schild = sudo('home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c');
+    schild.stdout.on('data', function (data) {
+        reading = data.toString();   
         if(reading){
             var lines = reading.split('\n');
             for (var i = 0; i < lines.length; i ++){

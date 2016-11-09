@@ -2,11 +2,12 @@ const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
 
 module.exports = function getCTReading(callback) {
-    const reading;
+    let reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/getcps.py']);
-
+    
     child.stdout.on('data', function (data) {       
         reading = data.toString();
+        console.log('cppppp', reading);
         if(reading){
             var obj = JSON.parse(reading);
             var objason = { 
@@ -23,10 +24,11 @@ module.exports = function getCTReading(callback) {
     });
     
     child.stderr.on('data', function (data) {
+        child.kill();
         console.log('err data: ' + data);
     });
 
     child.on('exit', function (exitCode) {
-        console.log("Child exited with code: " + exitCode);
+        console.log("Cavity temp read exited with code: " + exitCode);
     });
 }

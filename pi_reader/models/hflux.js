@@ -2,9 +2,9 @@ const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
 
 module.exports = function getMlx906Reading(callback) {
-    const reading;
+    let reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/hflux.py']);
-
+    
     child.stdout.on('data', function (data) {       
         reading = data.toString();
         if(reading){
@@ -24,6 +24,7 @@ module.exports = function getMlx906Reading(callback) {
     
     child.stderr.on('data', function (data) {
         console.log('hflux err data: ' + data);
+        child.kill();
     });
 
     child.on('exit', function (exitCode) {

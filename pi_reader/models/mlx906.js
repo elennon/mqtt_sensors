@@ -1,9 +1,20 @@
 const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
-
+var sudo = require('sudo');
+var options = {
+    cachePassword: true,
+    prompt: 'mice',
+    spawnOptions: { /* other options for spawn */ }
+};
 module.exports = function getMlx906Reading(callback) {
-    const reading;
-    const child = spawn('python', ['sudo /home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c']);
+    let reading;
+
+    var schild = sudo([ 'home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c'], options);
+    schild.stdout.on('data', function (data) {
+        console.log('sudo workd', data.toString());
+    });
+
+    const child = spawn('/home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c');
 
     child.stdout.on('data', function (data) {       
         reading = data.toString();
@@ -24,10 +35,10 @@ module.exports = function getMlx906Reading(callback) {
     });
     
     child.stderr.on('data', function (data) {
-        console.log('err data: ' + data);
+        console.log('Mlx906 err data: ' + data);
     });
 
     child.on('exit', function (exitCode) {
-        console.log("Child exited with code: " + exitCode);
+        console.log("Mlx906 read exited with code: " + exitCode);
     });
 }
