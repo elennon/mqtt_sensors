@@ -8,28 +8,30 @@ module.exports = function getSht15Reading(callback) {
             return callback(error);
         }
         reading = `${stdout}`;      
-        var lines = reading.split('\n');
-        for (var i = 0; i < lines.length; i ++){
-            switch(lines[i].split(':')[0]){
-                case 'temperature' :
-                    var temp = lines[i].split(':')[1];
-                case 'rh' :
-                    var rh = lines[i].split(':')[1];
-                case 'dew_point' :
-                    var dp = lines[i].split(':')[1];
+        if(reading){
+            var lines = reading.split('\n');
+            for (var i = 0; i < lines.length; i ++){
+                switch(lines[i].split(':')[0]){
+                    case 'temperature' :
+                        var temp = lines[i].split(':')[1];
+                    case 'rh' :
+                        var rh = lines[i].split(':')[1];
+                    case 'dew_point' :
+                        var dp = lines[i].split(':')[1];
+                }
             }
+            var objason = { 
+                createdAt : Date.now(), 
+                id : uuid.v4(), 
+                ip : "piSerial#", 
+                ok : true, 
+                sensor : "Sht15", 
+                temperature : temp,
+                rh : rh,
+                dew_point : dp         
+            } 
+            //console.log(objason);
+            callback(null, objason, "Sht15");
         }
-        var objason = { 
-            createdAt : Date.now(), 
-            id : uuid.v4(), 
-            ip : "piSerial#", 
-            ok : true, 
-            sensor : "Sht15", 
-            temperature : temp,
-            rh : rh,
-            dew_point : dp         
-        } 
-        //console.log(objason);
-        callback(null, objason, "Sht15");
     });
 }

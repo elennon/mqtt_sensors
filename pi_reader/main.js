@@ -6,7 +6,6 @@ var cavityTemp = require('./models/cavityTemp.js');
 var mlx906 = require('./models/mlx906.js');
 var sdp610 = require('./models/sdp610.js');
 var sht15 = require('./models/sht15.js');
-var spwn = require('./models/spawnRd.js');
 
 var counter = 1;
 var sdpArray = [];
@@ -41,6 +40,7 @@ function sendSdpAvg(callback){
         } 
         callback(null, objason, "Sdp610");
 }
+
 function getSdpAvg(){
     var sum = 0;
     for( var i = 0; i < sdpArray.length; i++ ) {
@@ -60,10 +60,9 @@ setInterval(function(){
     //   mlx906(handleResult);
     //   sendSdpAvg(handleResult);
     //   sht15(handleResult);
-    spwn(handleResult);
-      counter++;
-  }, 1* 1000);
+    counter++;
+}, 1* 1000);
 
-  client.on('error', function (error) {
-  console.log('in errorrrrr er :::' + error);
-})
+client.on('error', function (error) {
+    console.log('in errorrrrr er :::' + error);
+});
