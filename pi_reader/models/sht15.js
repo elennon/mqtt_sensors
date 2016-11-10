@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn;
 
 module.exports = function getSht15Reading(callback) {
     let reading;
-    const child = spawn('python', ['/usr/local/bin/sht -v -trd 4 17']);
+    const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/sht.py', '-v', '-trd', '4', '17']);
 
     child.stdout.on('data', function (data) {
         reading = data.toString();   
