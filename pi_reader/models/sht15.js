@@ -1,14 +1,11 @@
 const uuid = require('node-uuid');
-var sudo = require('sudo');
-var options = {
-    cachePassword: true,
-    prompt: 'mice'
-};
+const spawn = require('child_process').spawn;
 
 module.exports = function getSht15Reading(callback) {
     let reading;
-    var schild = sudo('home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c');
-    schild.stdout.on('data', function (data) {
+    const child = spawn('python', ['/usr/local/bin/sht -v -trd 4 17']);
+
+    child.stdout.on('data', function (data) {
         reading = data.toString();   
         if(reading){
             var lines = reading.split('\n');
@@ -35,5 +32,12 @@ module.exports = function getSht15Reading(callback) {
             //console.log(objason);
             callback(null, objason, "Sht15");
         }
+    });
+    child.stderr.on('data', function (data) {
+        console.log('sht15 err data: ' + data);
+    });
+
+    child.on('exit', function (exitCode) {
+        console.log("sht15 read exited with code: " + exitCode);
     });
 }
