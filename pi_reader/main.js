@@ -60,18 +60,21 @@ suspend(function* () {
 })();
 
 setInterval(function(){
-    suspend(function*() {
-        var data = yield bmp180(suspend.resume());
-        handleResult(null, data, "Bmp180");
+    suspend(function* () {
+        bmp180(handleResult);
+        yield setTimeout(suspend.resume(), 2000); 
+        hflux(handleResult);
+        yield setTimeout(suspend.resume(), 2000);
+        cavityTemp(handleResult);
+        yield setTimeout(suspend.resume(), 2000); 
+        mlx906(handleResult);
+        yield setTimeout(suspend.resume(), 2000);
+        sendSdpAvg(handleResult);
+        yield setTimeout(suspend.resume(), 2000);
+        sht15(handleResult);
     })();
-    bmp180(handleResult);
-    hflux(handleResult);
-    cavityTemp(handleResult);   //need muti readings fs.readFile(__filename, 'utf8', suspend.resume());
-    mlx906(handleResult);
-    sendSdpAvg(handleResult);
-    sht15(handleResult);
     counter++;
-}, 1* 1000);
+}, 1* 12000);
 
 client.on('error', function (error) {
     console.log('in errorrrrr er :::' + error);
