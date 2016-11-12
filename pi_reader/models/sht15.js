@@ -40,4 +40,8 @@ module.exports = function getSht15Reading(callback) {
     child.on('exit', function (exitCode) {
         console.log("sht15 read exited with code: " + exitCode);
     });
+
+    setTimeout(function () {
+        child.kill();
+    }, 1500);
 }

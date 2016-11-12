@@ -32,4 +32,8 @@ module.exports = function getBmp180Reading(callback) {
     child.on('exit', function (exitCode) {
         console.log("bmp180 read exited with code: " + exitCode);
     });
+
+    setTimeout(function () {
+        child.kill();
+    }, 1500);
 }

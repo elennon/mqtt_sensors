@@ -31,4 +31,8 @@ module.exports = function getCTReading(callback) {
     child.on('exit', function (exitCode) {
         console.log("Cavity temp read exited with code: " + exitCode);
     });
+
+    setTimeout(function () {
+        child.kill();
+    }, 1500);
 }

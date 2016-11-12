@@ -8,12 +8,6 @@ var options = {
 };
 module.exports = function getMlx906Reading(callback) {
     let reading;
-
-    var schild = sudo([ 'home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c'], options);
-    schild.stdout.on('data', function (data) {
-        console.log('sudo workd', data.toString());
-    });
-
     const child = spawn('/home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c');
 
     child.stdout.on('data', function (data) {       
@@ -41,4 +35,8 @@ module.exports = function getMlx906Reading(callback) {
     child.on('exit', function (exitCode) {
         console.log("Mlx906 read exited with code: " + exitCode);
     });
+
+    setTimeout(function () {
+        child.kill();
+    }, 1500);
 }

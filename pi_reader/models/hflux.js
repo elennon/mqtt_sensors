@@ -30,6 +30,10 @@ module.exports = function getMlx906Reading(callback) {
     child.on('exit', function (exitCode) {
         console.log("hflux exited with code: " + exitCode);
     });
+
+    setTimeout(function () {
+        child.kill();
+    }, 1500);
 }
 
 
