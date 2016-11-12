@@ -21,7 +21,8 @@ module.exports = function getBmp180Reading(callback) {
                 pressure : obj.pressure
             } 
             //console.log('allgoode--bmopp', objason);
-            callback(null, objason, "Bmp180");
+            //callback(null, objason, "Bmp180");
+            return objason;
         }
     });
     

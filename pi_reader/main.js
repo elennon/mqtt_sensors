@@ -53,10 +53,20 @@ setInterval(function(){
     sdp610(addSdpVal);
   }, 1* 2000);
 
+suspend(function* () {
+    console.log('Welcome to My Console,');
+    yield setTimeout(suspend.resume(), 10000); // 10 seconds pass..
+    console.log('Blah blah blah blah extra-blah');
+})();
+
 setInterval(function(){
+    suspend(function*() {
+        var data = yield bmp180(suspend.resume());
+        handleResult(null, data, "Bmp180");
+    })();
     bmp180(handleResult);
     hflux(handleResult);
-    cavityTemp(handleResult);   //need muti readings
+    cavityTemp(handleResult);   //need muti readings fs.readFile(__filename, 'utf8', suspend.resume());
     mlx906(handleResult);
     sendSdpAvg(handleResult);
     sht15(handleResult);
