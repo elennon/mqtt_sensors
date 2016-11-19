@@ -1,5 +1,6 @@
 const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
+var fs = require('fs');
 
 module.exports = function getBmp180Reading(callback) {
     let reading;
@@ -7,7 +8,6 @@ module.exports = function getBmp180Reading(callback) {
 
     child.stdout.on('data', function (data) {       
         reading = data.toString();
-        console.log('thts dat :', reading);
         if(reading){
             var obj = JSON.parse(reading);
             var objason = { 
@@ -21,20 +21,22 @@ module.exports = function getBmp180Reading(callback) {
                 pressure : obj.pressure
             } 
             //console.log('allgoode--bmopp', objason);
-            //callback(null, objason, "Bmp180");
-            return objason;
+            callback(null, objason, "Bmp180");
         }
     });
     
     child.stderr.on('data', function (data) {
+        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'bmp 180 error-- data: ' + data, function (err) {
+        });
         console.log('err data: ' + data);
     });
 
     child.on('exit', function (exitCode) {
-        console.log("bmp180 read exited with code: " + exitCode);
+        //console.log("bmp180 read exited with code: " + exitCode);
     });
 
     setTimeout(function () {
+        //console.log("kilt");
         child.kill();
     }, 1500);
 }

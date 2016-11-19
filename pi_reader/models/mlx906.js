@@ -1,17 +1,21 @@
-const uuid = require('node-uuid');
-const spawn = require('child_process').spawn;
-var sudo = require('sudo');
-var options = {
-    cachePassword: true,
-    prompt: 'mice',
-    spawnOptions: { /* other options for spawn */ }
-};
-module.exports = function getMlx906Reading(callback) {
-    let reading;
-    const child = spawn('/home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c');
+var uuid = require('node-uuid');
+const exec = require('child_process').exec;
+var fs = require('fs');
 
-    child.stdout.on('data', function (data) {       
-        reading = data.toString();
+module.exports = function getMlx906Reading(callback) {
+    var reading;
+    exec('sudo /home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c', (error, stdout, stderr) => {
+        if (error) {
+            fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
+            });
+            return callback(error);
+        }
+        if (stderr) {
+            fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
+            });
+            return callback(error);
+        }
+        reading = `${stdout}`;
         if(reading){
             var obj = reading.split(',');
             var objason = { 
@@ -23,20 +27,8 @@ module.exports = function getMlx906Reading(callback) {
                 ambiTemp : obj[0].trim(),
                 skyTemp : obj[1].trim()
             } 
-            //console.log(objason);
-            callback(null, objason, "Mlx906");
-        }      
+        }
+        //console.log(objason);
+        callback(null, objason, "Mlx906");
     });
-    
-    child.stderr.on('data', function (data) {
-        console.log('Mlx906 err data: ' + data);
-    });
-
-    child.on('exit', function (exitCode) {
-        console.log("Mlx906 read exited with code: " + exitCode);
-    });
-
-    setTimeout(function () {
-        child.kill();
-    }, 1500);
 }

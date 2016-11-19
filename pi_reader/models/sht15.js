@@ -1,5 +1,6 @@
 const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
+var fs = require('fs');
 
 module.exports = function getSht15Reading(callback) {
     let reading;
@@ -34,11 +35,13 @@ module.exports = function getSht15Reading(callback) {
         }
     });
     child.stderr.on('data', function (data) {
+        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'sht15 error-- data: ' + data, function (err) {
+        });
         console.log('sht15 err data: ' + data);
     });
 
     child.on('exit', function (exitCode) {
-        console.log("sht15 read exited with code: " + exitCode);
+        //console.log("sht15 read exited with code: " + exitCode);
     });
 
     setTimeout(function () {

@@ -1,5 +1,6 @@
 const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
+var fs = require('fs');
 
 module.exports = function getCTReading(callback) {
     let reading;
@@ -7,7 +8,6 @@ module.exports = function getCTReading(callback) {
     
     child.stdout.on('data', function (data) {       
         reading = data.toString();
-        console.log('cppppp', reading);
         if(reading){
             var obj = JSON.parse(reading);
             var objason = { 
@@ -24,12 +24,13 @@ module.exports = function getCTReading(callback) {
     });
     
     child.stderr.on('data', function (data) {
-        child.kill();
+        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'cavity temp error-- data: ' + data, function (err) {
+        });
         console.log('err data: ' + data);
     });
 
     child.on('exit', function (exitCode) {
-        console.log("Cavity temp read exited with code: " + exitCode);
+        //console.log("Cavity temp read exited with code: " + exitCode);
     });
 
     setTimeout(function () {

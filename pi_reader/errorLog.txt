@@ -1,0 +1,3 @@
+sdp610 err data: Error: Write failed
+sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
+sdp610 err data: Error: Write failed

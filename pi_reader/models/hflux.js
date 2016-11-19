@@ -1,5 +1,6 @@
 const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
+var fs = require('fs');
 
 module.exports = function getMlx906Reading(callback) {
     let reading;
@@ -23,12 +24,13 @@ module.exports = function getMlx906Reading(callback) {
     });
     
     child.stderr.on('data', function (data) {
+        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'hflux error-- data: ' + data, function (err) {
+        });
         console.log('hflux err data: ' + data);
-        child.kill();
     });
 
     child.on('exit', function (exitCode) {
-        console.log("hflux exited with code: " + exitCode);
+        //console.log("hflux exited with code: " + exitCode);
     });
 
     setTimeout(function () {
