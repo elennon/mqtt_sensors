@@ -53,9 +53,9 @@ function getSdpAvg(){
     return sum / sdpArray.length;
 }
 
-setInterval(function(){
-    sdp610(addSdpVal);
- }, 1* 6000);
+//setInterval(function(){
+    //sdp610(addSdpVal);
+ //}, 1* 6000);
 
 setInterval(function(){
     suspend(function* () {
@@ -66,8 +66,8 @@ setInterval(function(){
         cavityTemp(handleResult);
         yield setTimeout(suspend.resume(), 10000); 
         mlx906(handleResult);
-        yield setTimeout(suspend.resume(), 10000);
-        sendSdpAvg(handleResult);
+        //yield setTimeout(suspend.resume(), 10000);
+        //sendSdpAvg(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         sht15(handleResult);
     })();
