@@ -29,7 +29,8 @@ $n=0;
 
 	//echo time()."\n";
 	echo $val;
-	//echo "\n";
+	echo "\n";
+exit();
 	
 	//sleep(1);
 //}

@@ -8,6 +8,7 @@ var sdp610 = require('./models/sdp610.js');
 var sht15 = require('./models/sht15.js');
 var suspend = require('suspend');
 var fs = require('fs');
+var memwatch = require('memwatch-next');
 
 var counter = 1;
 var sdpArray = [];
@@ -18,10 +19,18 @@ var options = {
 };
 var client = mqtt.connect('mqtt://139.59.172.240', options);
 console.log('process:-->   ', process.pid);
-//mlx906(handleResult);
+//sdp610(handleResult);
+
+memwatch.on('leak', function(info) {
+    fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
+        });
+        console.error('memory leak: ' + info);
+});
 
 function handleResult(err, result, collection) {
     if (err) {
+        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'handleResult error-- error: ' + err, function (err) {
+        });
         console.error(err.stack || err.message);
         return;
     }
@@ -29,33 +38,6 @@ function handleResult(err, result, collection) {
     client.publish(collection, JSON.stringify(result));
     console.log('reading #' + counter + '  ... ' + result.sensor);
 }
-function addSdpVal(val){
-    sdpArray.push(val);
-}
-function sendSdpAvg(callback){
-    var objason = { 
-        createdAt : Date.now(), 
-        id : uuid.v4(), 
-        ip : "piSerial#", 
-        ok : true, 
-        sensor : "Sdp610", 
-        val : getSdpAvg()
-    }  
-    //console.log(objason);
-    callback(null, objason, "Sdp610");
-}
-
-function getSdpAvg(){
-    var sum = 0;
-    for( var i = 0; i < sdpArray.length; i++ ) {
-        sum += parseFloat( sdpArray[i]);
-    }
-    return sum / sdpArray.length;
-}
-
-//setInterval(function(){
-    //sdp610(addSdpVal);
- //}, 1* 6000);
 
 setInterval(function(){
     suspend(function* () {
@@ -66,8 +48,8 @@ setInterval(function(){
         cavityTemp(handleResult);
         yield setTimeout(suspend.resume(), 10000); 
         mlx906(handleResult);
-        //yield setTimeout(suspend.resume(), 10000);
-        //sendSdpAvg(handleResult);
+        yield setTimeout(suspend.resume(), 10000);
+        sdp610(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         sht15(handleResult);
     })();

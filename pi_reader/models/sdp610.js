@@ -1,5 +1,5 @@
 const uuid = require('node-uuid');
-const spawn = require('child_process').spawn;
+const exec = require('child_process').exec;
 var sudo = require('sudo');
 var fs = require('fs');
 
@@ -9,29 +9,29 @@ module.exports = function getSdp610Reading(callback) {
         prompt: 'mice',
         spawnOptions: { /* other options for spawn */ }
     };
-    var child = sudo([ 'php', '/home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php' ], options);
+    //var child = sudo([ 'php', '/home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php' ], options);
     let reading;
-    //const child = spawn('php', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php']);
-
-    child.stdout.on('data', function (data) {       
-        reading = data.toString();
+    
+    exec('php /home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php' ,(error, stdout, stderr) => {
+        if(error) {
+            console.log('errrrrrror ' + error);
+            callback(error);
+        }
+        var reading = `${stdout}`;
+        let result = parseFloat(reading.trim());
         if(reading){
-            callback(reading.trim());
+            var objason = { 
+                createdAt : Date.now(), 
+                id : uuid.v4(), 
+                ip : "piSerial#", 
+                ok : true, 
+                sensor : "Sdp610", 
+                val : result
+            }  
+            console.log("sdp610***************************" + result);
+            callback(null, objason, "Sdp610");
             //console.log("sdp610******************************reding ok");
         }
     });
-    
-    child.stderr.on('data', function (data) {
-        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'sdp610 err data: ' + data, function (err) {
-        });
-        console.log('sdp610 err data: ' + data);
-    });
 
-    child.on('exit', function (exitCode) {
-        //console.log("sdp610 exited with code: " + exitCode);
-    });
-
-    setTimeout(function () {
-        child.kill();
-    }, 1000);
 }
