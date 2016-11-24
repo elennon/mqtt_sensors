@@ -9,17 +9,19 @@ module.exports = function getCTReading(callback) {
     child.stdout.on('data', function (data) {       
         reading = data.toString();
         if(reading){
-            var obj = JSON.parse(reading);
-            var objason = { 
-                createdAt : Date.now(), 
-                id : uuid.v4(), 
-                ip : "piSerial#", 
-                ok : true, 
-                sensor : "Cavity Temp: " + obj.sensorId, 
-                val : obj.val
-            } 
-            //console.log(objason);
-            callback(null, objason, "CavityTemp");
+            var objs = JSON.parse(reading);
+            for (var obj in objs){
+                var rdn = { 
+                    createdAt : Date.now(), 
+                    id : uuid.v4(), 
+                    ip : "piSerial#", 
+                    ok : true, 
+                    sensor : "Cavity Temp: " + objs[obj].sensorId, 
+                    val : objs[obj].val
+                } 
+                //console.log(objason);
+                callback(null, rdn, "CavityTemp");
+            }
         }
     });
     
@@ -34,6 +36,7 @@ module.exports = function getCTReading(callback) {
     });
 
     setTimeout(function () {
+        //console.log('**timeourtrt');
         child.kill();
-    }, 1500);
+    }, 9000);
 }

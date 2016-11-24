@@ -1,94 +1,8 @@
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write error: Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write errorsdp610 err data: : Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: tail: write error: Broken pipe
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
 sht15 error-- data: Traceback (most recent call last):
   File "/home/pi/projects/mqtt_reader/pi_reader/scripts/sht.py", line 9, in <module>
-    load_entry_point('sht-sensor==16.2.0', 'console_scripts', 'sht')()
+sht15 error-- data:     load_entry_point('sht-sensor==16.2.0', 'console_scripts', 'sht')()
   File "/usr/local/lib/python2.7/dist-packages/sht_sensor/sensor.py", line 264, in main
-sht15 error-- data:     sht = Sht(opts.pin_sck, opts.pin_data)
+    sht = Sht(opts.pin_sck, opts.pin_data)
   File "/usr/local/lib/python2.7/dist-packages/sht_sensor/sensor.py", line 211, in __init__
     super(Sht, self).__init__(pin_sck, pin_data, **sht_comms_kws)
   File "/usr/local/lib/python2.7/dist-packages/sht_sensor/sensor.py", line 67, in __init__
@@ -98,6 +12,26 @@ sht15 error-- data:     sht = Sht(opts.pin_sck, opts.pin_data)
   File "/usr/local/lib/python2.7/dist-packages/sht_sensor/gpio.py", line 65, in set_pin_value
     with open(get_pin_path(n, k), 'wb', 0) as dst:
 IOError: [Errno 13] Permission denied: '/sys/class/gpio/gpio4/direction'
+bmp 180 error-- data: Traceback (most recent call last):
+  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 7, in <module>
+bmp 180 error-- data:     sensor = BMP085.BMP085()
+  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 69, in __init__
+  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 72, in _load_calibration
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 200, in readS16BE
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 177, in readS16
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 164, in readU16
+  File "build/bdist.linux-armv7l/egg/Adafruit_PureIO/smbus.py", line 173, in read_word_data
+IOError: [Errno 5] Input/output error
+bmp 180 error-- data: Traceback (most recent call last):
+  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 7, in <module>
+bmp 180 error-- data:     sensor = BMP085.BMP085()
+  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 69, in __init__
+  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 72, in _load_calibration
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 200, in readS16BE
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 177, in readS16
+  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 164, in readU16
+  File "build/bdist.linux-armv7l/egg/Adafruit_PureIO/smbus.py", line 173, in read_word_data
+IOError: [Errno 5] Input/output error
 sht15 error-- data: Traceback (most recent call last):
   File "/home/pi/projects/mqtt_reader/pi_reader/scripts/sht.py", line 9, in <module>
 sht15 error-- data:     load_entry_point('sht-sensor==16.2.0', 'console_scripts', 'sht')()
@@ -112,241 +46,56 @@ sht15 error-- data:     load_entry_point('sht-sensor==16.2.0', 'console_scripts'
   File "/usr/local/lib/python2.7/dist-packages/sht_sensor/gpio.py", line 65, in set_pin_value
     with open(get_pin_path(n, k), 'wb', 0) as dst:
 IOError: [Errno 13] Permission denied: '/sys/class/gpio/gpio17/direction'
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-sdp610 err data: Error: Write failed
-
-
-
-
-reading #18  ... Hflux
-reading #18  ... Cavity Temp: 00000756a09f
-events.js:160
-      throw er; // Unhandled 'error' event
-      ^
-
-Error: kill EPERM
-    at exports._errnoException (util.js:1036:11)
-    at ChildProcess.kill (internal/child_process.js:392:26)
-    at Timeout._onTimeout (/home/pi/projects/mqtt_reader/pi_reader/models/sdp610.js:35:15)
-    at tryOnTimeout (timers.js:232:11)
-    at Timer.listOnTimeout (timers.js:202:5)
-pi@raspberrypi:~/projects/mqtt_reader/pi_reader $ node main.js
-process:-->    6324
-reading #2  ... Bmp180
-reading #2  ... Hflux
-reading #2  ... Cavity Temp: 00000756a09f
-reading #2  ... Mlx906
-sdp610 err data: Error: Write failed
-
-reading #2  ... Sht15
-
 bmp 180 error-- data: Traceback (most recent call last):
-bmp 180 error-- data:   File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 7, in <module>
-    sensor = BMP085.BMP085()
+  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 7, in <module>
+bmp 180 error-- data:     sensor = BMP085.BMP085()
   File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 69, in __init__
   File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 72, in _load_calibration
   File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 200, in readS16BE
   File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 177, in readS16
   File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 164, in readU16
   File "build/bdist.linux-armv7l/egg/Adafruit_PureIO/smbus.py", line 173, in read_word_data
-bmp 180 error-- data: IOError: [Errno 5] Input/output error
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 7, in <module>
-bmp 180 error-- data:     sensor = BMP085.BMP085()
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 69, in __init__
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 73, in _load_calibration
-  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 200, in readS16BE
-  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 177, in readS16
-  File "build/bdist.linux-armv7l/egg/Adafruit_GPIO/I2C.py", line 164, in readU16
-bmp 180 error-- data:   File "build/bdist.linux-armv7l/egg/Adafruit_PureIO/smbus.py", line 173, in read_word_data
 IOError: [Errno 5] Input/output error
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-    temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
-bmp 180 error-- data: Traceback (most recent call last):
-  File "/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py", line 8, in <module>
-bmp 180 error-- data:     temp = 'Temp = {0:0.2f}'.format(sensor.read_temperature())
-  File "build/bdist.linux-armv7l/egg/Adafruit_BMP/BMP085.py", line 143, in read_temperature
-ZeroDivisionError: integer division or modulo by zero
+sdp610 err data: Error: Write failed
+handleResult error-- error: [object Object]sdp610 err data: Error: Write failed
+handleResult error-- error: [object Object]sdp610 err data: Error: Write failed
+handleResult error-- error: [object Object]sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
+sdp610 err data: Error: Write failed
