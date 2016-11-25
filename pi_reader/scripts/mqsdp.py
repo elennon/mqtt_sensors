@@ -14,60 +14,63 @@ import paho.mqtt.client as mqtt
 import signal
 import socket
 import sys
+import uuid
  
- 
-def on_connect(client, userdata, rc):
-    print("Connected with result code {0}".format(rc))
-    # Subscribe here to any topics that you are interested in
- 
- 
+def on_connect(client, userdata, flags, rc):
+    print("Connected with result code "+str(rc))
+
+    # Subscribing in on_connect() means that if we lose the connection and
+    # reconnect then subscriptions will be renewed.
+    client.subscribe("$SYS/#")
+
+# The callback for when a PUBLISH message is received from the server.
+def on_message(client, userdata, msg):
+    print(msg.topic+" "+str(msg.payload))
+
+def getraeding(counter):
+    return counter
+
+def send(lst, counter, client):
+    topic = 'Spd610'
+    print counter
+    print('(((((((((((((((((2)))))))))))))))))')
+    #measurements = 0.99
+    lst.append(counter)
+    if counter < 6 :  
+        print 'counter'
+        payload = {
+            "createdAt" : time.strftime("%H:%M:%S"), 
+            "id" : uuid.uuid4().int, 
+            "ip" : "piSerial#", 
+            "ok" : True, 
+            "sensor" : "Sdp610", 
+            "val" : 66.77
+        }
+        print payload
+        client.publish(topic, json.dumps(payload))
+
 def main():
     print('detecting sensors')
-   
-    #sdp = find_sensor_by_type('sdp600')
     lst = [];
-    counter = 0
+    counter = 1
+    #sdp = find_sensor_by_type('sdp600')
    
-    print('connecting to mqtt')
     client = mqtt.Client()
     client.on_connect = on_connect
-    client.connect("http://139.59.172.240", "1884")
- 
-    def send_sensor_values(sensor, sensor_name):
-        topic = 'Spd610'
-       
-        def send(timestamp, values):
-            measurements = 0.99
-            lst[counter] = measurements
-            if counter < 6 :  
-                payload = {
-                    "createdAt":1479334417414,
-                    "id":"e33dc46d-b8dc-44c5-89c1-83764575e3de",
-                    "ip":"piSerial#",
-                    "ok":true,
-                    "sensor":"Sdp610",
-                    "val":-49.666666666
-                }
-                client.publish(topic, json.dumps(payload))
-                counter += 1
-            else:
-                counter += 1
-        return send
- 
-    def signal_handler(signal, frame):
-        print('terminating')
-        client.disconnect()
- 
-    print('(((((((((((((((((9)))))))))))))))))')
- 
-    signal.signal(signal.SIGINT, signal_handler)
- 
+    client.connect("139.59.172.240", 1884)
+    print('connected')
+    
     try:
-        for x in range(0, 5):
+        print('furtt')
+        for x in range(0, 6):
             print "We're on time %d" % (x)
-            send_sensor_values(sdp, 'sdp')
-            time.sleep(10)
-       
+            rd = getraeding(counter)
+            lst.append(rd)
+            print lst
+            counter += 1
+            #send(lst, counter, client)
+            time.sleep(4)
+        print sum(lst)/len(lst)
     finally:
         print "done"
  
