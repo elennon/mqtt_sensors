@@ -16,6 +16,9 @@ import signal
 import socket
 import sys
 
+global lst = [];
+global counter = 1;
+
 
 def on_connect(client, userdata, rc):
     print("Connected with result code {0}".format(rc))
@@ -25,9 +28,8 @@ def on_connect(client, userdata, rc):
 def main():
     print('detecting sensors')
     sdp = find_sensor_by_type('sdp600')
-    lst = []
-    counter = 1
-    if not any((sdp)):
+    
+    if not sdp:
         sys.stderr.writelines("couldn't find any sensors\n")
         return
 
@@ -37,8 +39,8 @@ def main():
     client.connect("139.59.172.240", 1884)
     print('connected')
 
-    def send_sensor_values(sensor, sensor_name):
-        
+    def send_sensor_values(sensor, sensor_name, lst):
+        print (lst)
         def send(timestamp, values):
             measurements = values.values()[0]
             if all(m is not None for m in measurements):
@@ -66,12 +68,14 @@ def main():
 
     signal.signal(signal.SIGINT, signal_handler)
 
-    try:
-        
+    try:   
         if sdp:
-            sdp_reader = SensorReader((sdp,), 10, send_sensor_values(lst, counter))
+            sdp_reader = SensorReader((sdp,), 10, send_sensor_values(sdp, 'sdp', lst))
             sdp_reader.start()
-        client.loop_forever()
+        time.sleep(30)
+        client.loop_stop()
+        if sdp:
+            sdp_reader.join()
     finally:
         client.loop_stop()
         if sdp:
@@ -79,4 +83,4 @@ def main():
 
 
 if __name__ == '__main__':
-main()
+    main()

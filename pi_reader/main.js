@@ -19,7 +19,7 @@ var options = {
 };
 var client = mqtt.connect('mqtt://139.59.172.240', options);
 console.log('process:-->   ', process.pid);
-//sdp610(handleResult);
+sdp610(handleResult);
 
 memwatch.on('leak', function(info) {
     fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
@@ -48,8 +48,6 @@ setInterval(function(){
         cavityTemp(handleResult);
         yield setTimeout(suspend.resume(), 10000); 
         mlx906(handleResult);
-        yield setTimeout(suspend.resume(), 10000);
-        sdp610(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         sht15(handleResult);
     })();
