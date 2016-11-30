@@ -193,10 +193,10 @@ class BMP180:
 def date_handler(obj):
     return obj.isoformat() if hasattr(obj, 'isoformat') else obj
  
-if __name__ == "__main__":
+def getBMP180():
     bmp = BMP180(0x77)
     obj = {"time":time.time(),"temp":bmp.GetTemp(),"pressure":bmp.GetPressure(),"altitude":bmp.GetAltitude()}
-    print json.dumps(obj)
+    return json.dumps(obj)
    
     #print(datetime.datetime.now().time())
     #print(time.time())
