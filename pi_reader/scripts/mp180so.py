@@ -3,7 +3,7 @@
 
 import time
 
-from bmp180 import bmp180
+import bmp180
 import uuid
 import json
 import paho.mqtt.client as mqtt
@@ -22,7 +22,8 @@ def main():
 
     try:   
         while True:
-            val = bmp180
+            mper = bmp180.BMP180()
+            val = mper.getBMP180()
             print val
             payload = {
                 "id":str(uuid.uuid4()),

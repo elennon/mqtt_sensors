@@ -190,18 +190,21 @@ class BMP180:
  
         return altitude
  
-def date_handler(obj):
-    return obj.isoformat() if hasattr(obj, 'isoformat') else obj
- 
-def getBMP180():
-    bmp = BMP180(0x77)
-    obj = {"time":time.time(),"temp":bmp.GetTemp(),"pressure":bmp.GetPressure(),"altitude":bmp.GetAltitude()}
-    return json.dumps(obj)
-   
-    #print(datetime.datetime.now().time())
-    #print(time.time())
-    #print(bmp.GetTemp())
-    #print(bmp.GetPressure())
-    #print(bmp.GetAltitude())
+    def get()
+        obj = {"time":time.time(),"temp":bmp.GetTemp(),"pressure":bmp.GetPressure(),"altitude":bmp.GetAltitude()}
+        return json.dumps(obj)
+
+    def date_handler(obj):
+        return obj.isoformat() if hasattr(obj, 'isoformat') else obj
+    
+    def __init__(self):
+        bmp = BMP180(0x77)
+        
+    
+        #print(datetime.datetime.now().time())
+        #print(time.time())
+        #print(bmp.GetTemp())
+        #print(bmp.GetPressure())
+        #print(bmp.GetAltitude())
 
 
