@@ -1,9 +1,8 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
+import Adafruit_ADS1x15
 import time
-
-import bmp180
 import uuid
 import json
 import paho.mqtt.client as mqtt
@@ -21,25 +20,28 @@ def main():
     print('connected')
 
     try:   
-        while True:
-            mper = bmp180.BMP180()
-            print 'strreooeieidss'
-            val = mper.getBMP180()
-            print val
+        while True:        
+            adc = Adafruit_ADS1x15.ADS1115()
+            GAIN = 16
+            # Read all the ADC channel values in a list.
+            value = adc.read_adc(1, gain=GAIN)
+            print ('%s' % value)
             payload = {
-                "id":str(uuid.uuid4()),
-     
+                "id": str(uuid.uuid4()),
                 "createdAt": time.time(),
                 "ip":"piSerial#",
                 "ok":"true",
-                "sensor":"Bmp180",
-                "val": 66
+                "sensor":"Hflux",
+                "val": value
             }
             print (payload)
-            client.publish('Bmp180', json.dumps(payload))
-            time.sleep(1)
-    except:
-        print 'error'
+            client.publish('Hflux', json.dumps(payload))
+            time.sleep(10)
+    except Exception:
+        print Exception.message
 
 if __name__ == '__main__':
     main()
+
+
+

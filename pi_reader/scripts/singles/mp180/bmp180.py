@@ -196,9 +196,6 @@ class BMP180:
 
     def date_handler(obj):
         return obj.isoformat() if hasattr(obj, 'isoformat') else obj
-    
-    def __init__(self):
-        bmp = BMP180(0x77)
         
     
         #print(datetime.datetime.now().time())

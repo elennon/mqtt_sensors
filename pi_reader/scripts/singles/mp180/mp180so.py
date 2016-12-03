@@ -22,22 +22,19 @@ def main():
 
     try:   
         while True:
-            mper = bmp180.BMP180()
-            print 'strreooeieidss'
-            val = mper.getBMP180()
-            print val
+            mper = bmp180.BMP180(0x77)
             payload = {
-                "id":str(uuid.uuid4()),
-     
+                "id": str(uuid.uuid4()),
                 "createdAt": time.time(),
                 "ip":"piSerial#",
                 "ok":"true",
                 "sensor":"Bmp180",
-                "val": 66
+                "temp": mper.GetTemp(),
+                "pressure" : mper.GetPressure()
             }
             print (payload)
             client.publish('Bmp180', json.dumps(payload))
-            time.sleep(1)
+            time.sleep(10)
     except:
         print 'error'
 
