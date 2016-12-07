@@ -15,10 +15,10 @@ sudo apt-get update && sudo apt-get install git && echo 'done update' && wget ht
 sudo apt-get install build-essential libssl-dev && curl https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash && source ~/.profile;
     
 #npm
-npm install npm@latest -g && nvm install v7.2.1 && echo 'all done';
+npm install npm@latest -g && nvm install v7.2.1 && echo 'done npm/nvm';
     
 
 // python
-sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential
+sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential && echo 'all done'
 
 
