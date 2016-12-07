@@ -1,13 +1,14 @@
 #! /bin/sh
 
+# ssh-keygen -R 192.168.43.199
 # git clone https://github.com/elennon/mqtt_sensors.git
 # sudo apt-get install xrdp
 # sudo service xrdp start
 
-sudo apt-get update && sudo apt-get install git;
+#sudo apt-get update && sudo apt-get install git;
 
 #// node, nvm, npm
-wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv6l.tar.gz && tar -xvf node-v4.0.0-linux-armv6l.tar.gz && cd node-v4.0.0-linux-armv6l && sudo cp -R * /usr/local/;
+sudo apt-get update && sudo apt-get install git && wget https://nodejs.org/dist/v4.0.0/node-v4.0.0-linux-armv6l.tar.gz && tar -xvf node-v4.0.0-linux-armv6l.tar.gz && cd node-v4.0.0-linux-armv6l && sudo cp -R * /usr/local/;
     
        
 #nvm:
