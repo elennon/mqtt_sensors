@@ -1,7 +1,6 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 from w1thermsensor import W1ThermSensor
-import Adafruit_ADS1x15
 import time
 import uuid
 import json
