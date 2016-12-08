@@ -4,7 +4,7 @@ var fs = require('fs');
 
 module.exports = function getMlx906Reading(callback) {
     let reading;
-    const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/hflux.py']);
+    const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/hflux.py']);
     
     child.stdout.on('data', function (data) {       
         reading = data.toString();
@@ -24,7 +24,7 @@ module.exports = function getMlx906Reading(callback) {
     });
     
     child.stderr.on('data', function (data) {
-        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'hflux error-- data: ' + data, function (err) {
+        fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'hflux error-- data: ' + data, function (err) {
         });
         console.log('hflux err data: ' + data);
     });

@@ -4,7 +4,7 @@ var fs = require('fs');
 
 module.exports = function getSht15Reading(callback) {
     let reading;
-    const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/sht.py', '-v', '-trd', '4', '17']);
+    const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/sht.py', '-v', '-trd', '4', '17']);
 
     child.stdout.on('data', function (data) {
         reading = data.toString();   
@@ -35,7 +35,7 @@ module.exports = function getSht15Reading(callback) {
         }
     });
     child.stderr.on('data', function (data) {
-        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'sht15 error-- data: ' + data, function (err) {
+        fs.appendFile('/home/pi/projects/mqtt_reader/mqtt_sensors/errorLog.txt', 'sht15 error-- data: ' + data, function (err) {
         });
         console.log('sht15 err data: ' + data);
     });

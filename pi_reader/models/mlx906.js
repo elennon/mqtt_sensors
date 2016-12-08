@@ -4,14 +4,14 @@ var fs = require('fs');
 
 module.exports = function getMlx906Reading(callback) {
     var reading;
-    exec('sudo /home/pi/projects/mqtt_reader/pi_reader/scripts/eye2c', (error, stdout, stderr) => {
+    exec('sudo /home/pi/projects/mqtt_sensors/pi_reader/scripts/eye2c', (error, stdout, stderr) => {
         if (error) {
-            fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
+            fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
             });
             return callback(error);
         }
         if (stderr) {
-            fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
+            fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'mlx906 error-- data: ' + data, function (err) {
             });
             return callback(error);
         }

@@ -4,7 +4,7 @@ var fs = require('fs');
 
 module.exports = function getBmp180Reading(callback) {
     let reading;
-    const child = spawn('python', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/adaBmp.py']);
+    const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/adaBmp.py']);
 
     child.stdout.on('data', function (data) {       
         reading = data.toString();
@@ -26,7 +26,7 @@ module.exports = function getBmp180Reading(callback) {
     });
     
     child.stderr.on('data', function (data) {
-        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'bmp 180 error-- data: ' + data, function (err) {
+        fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'bmp 180 error-- data: ' + data, function (err) {
         });
         console.log('err data: ' + data);
     });

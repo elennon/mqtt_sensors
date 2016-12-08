@@ -22,14 +22,14 @@ console.log('process:-->   ', process.pid);
 sdp610(handleResult);
 
 memwatch.on('leak', function(info) {
-    fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
+    fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
         });
         console.error('memory leak: ' + info);
 });
 
 function handleResult(err, result, collection) {
     if (err) {
-        fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'handleResult error-- error: ' + err, function (err) {
+        fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'handleResult error-- error: ' + err, function (err) {
         });
         console.error(err.stack || err.message);
         return;
@@ -38,6 +38,36 @@ function handleResult(err, result, collection) {
     client.publish(collection, JSON.stringify(result));
     console.log('reading #' + counter + '  ... ' + result.sensor);
 }
+
+function addSdpVal(val){
+    sdpArray.push(val);
+}
+
+function sendSdpAvg(callback){
+    var objason = { 
+        createdAt : Date.now(), 
+        id : uuid.v4(), 
+        ip : "piSerial#", 
+        ok : true, 
+        sensor : "Sdp610", 
+        val : getSdpAvg()
+    }  
+    //console.log(objason);
+    callback(null, objason, "Sdp610");
+}
+
+function getSdpAvg(){
+    var sum = 0;
+    for( var i = 0; i < sdpArray.length; i++ ) {
+        sum += parseFloat( sdpArray[i]);
+    }
+    return sum / sdpArray.length;
+}
+
+//setInterval(function(){
+    //sdp610(addSdpVal);
+ //}, 1* 6000);
+
 
 setInterval(function(){
     suspend(function* () {
@@ -48,6 +78,8 @@ setInterval(function(){
         cavityTemp(handleResult);
         yield setTimeout(suspend.resume(), 10000); 
         mlx906(handleResult);
+        //yield setTimeout(suspend.resume(), 10000);
+        //sendSdpAvg(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         sht15(handleResult);
     })();
@@ -55,7 +87,7 @@ setInterval(function(){
 }, 1* 60000);
 
 client.on('error', function (error) {
-    fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'main js error-- data: ' + data, function (err) {
+    fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'main js error-- data: ' + data, function (err) {
         });
     console.log('in errorrrrr ********************' + error);
 });
