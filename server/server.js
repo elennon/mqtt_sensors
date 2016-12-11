@@ -54,6 +54,9 @@ server.on('published', function(packet, client) {
         case "Sdp610":
             collection = db.get('Sdp610');   
             break;
+        case "WeatherStaion":
+            collection = db.get('WeatherStaion');   
+            break;
     } 
     if(collection !== null){
         collection.insert(JSON.parse(packet.payload), function (err, doc) {
