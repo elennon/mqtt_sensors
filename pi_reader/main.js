@@ -19,7 +19,8 @@ var options = {
 };
 var client = mqtt.connect('mqtt://139.59.172.240', options);
 console.log('process:-->   ', process.pid);
-sdp610(handleResult);
+//sdp610(handleResult);
+//sht15(handleResult);
 
 memwatch.on('leak', function(info) {
     fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
@@ -52,6 +53,7 @@ function sendSdpAvg(callback){
         sensor : "Sdp610", 
         val : getSdpAvg()
     }  
+    sdpArray = [];
     //console.log(objason);
     callback(null, objason, "Sdp610");
 }
@@ -66,25 +68,26 @@ function getSdpAvg(){
 
 //setInterval(function(){
     //sdp610(addSdpVal);
- //}, 1* 6000);
-
+//}, 1* 6000);
 
 setInterval(function(){
     suspend(function* () {
+	//sendSdpAvg(handleResult);
+        sdp610(handleResult);
+        yield setTimeout(suspend.resume(), 10000);
         bmp180(handleResult);
+	yield setTimeout(suspend.resume(), 10000); 
+        //mlx906(handleResult);
         yield setTimeout(suspend.resume(), 10000); 
         hflux(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         cavityTemp(handleResult);
-        yield setTimeout(suspend.resume(), 10000); 
-        mlx906(handleResult);
-        //yield setTimeout(suspend.resume(), 10000);
-        //sendSdpAvg(handleResult);
         yield setTimeout(suspend.resume(), 10000);
         sht15(handleResult);
     })();
     counter++;
 }, 1* 60000);
+
 
 client.on('error', function (error) {
     fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'main js error-- data: ' + data, function (err) {

@@ -21,6 +21,17 @@ sudo npm install npm@latest -g && nvm install v7.2.1 && echo 'done npm/nvm';
 # python
 sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential && echo 'all done first python' && sudo pip install w1thermsensor && sudo pip install paho-mqtt && sudo pip install sht-sensor
 
+#/boot/config.txt
+#dtparam=i2c_arm=on
+#dtparam=i2c1=on
+#dtoverlay=w1-gpio,gpiopin=18
+
+
+#/etc/modules
+#i2c-bcm2708
+#i2c-dev
+#w1-gpio
+#w1-therm
 
 
 
