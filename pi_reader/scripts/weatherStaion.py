@@ -45,7 +45,7 @@ while 1:
 			payload = {
                             "id": str(uuid.uuid4()),
                             "createdAt": resp[0],
-                            "wind_direction" : resp[0]
+                            "wind_direction" : resp[1]
                         }
                 
                         client.publish('WeatherStation', json.dumps(payload))
