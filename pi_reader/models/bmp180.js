@@ -13,7 +13,7 @@ module.exports = function getBmp180Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "piserial#", 
+                ip : "east wall", 
                 message : "xvvxvx",
                 ok : true, 
                 sensor : "Bmp180", 

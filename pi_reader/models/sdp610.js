@@ -19,7 +19,7 @@ module.exports = function getSdp610Reading(callback) {
 	    var objason = { 
 	    createdAt : Date.now(), 
 	        id : uuid.v4(), 
-	        ip : "piSerial#", 
+	        ip : "east wall", 
 	        ok : true, 
 	        sensor : "Sdp610", 
 		val : reading.trim()

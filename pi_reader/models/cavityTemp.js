@@ -14,7 +14,7 @@ module.exports = function getCTReading(callback) {
                 var rdn = { 
                     createdAt : Date.now(), 
                     id : uuid.v4(), 
-                    ip : "piSerial#", 
+                    ip : "east wall", 
                     ok : true, 
                     sensor : "Cavity Temp: " + objs[obj].sensorId, 
                     val : objs[obj].val

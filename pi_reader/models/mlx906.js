@@ -21,7 +21,7 @@ module.exports = function getMlx906Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "piSerial#", 
+                ip : "east wall", 
                 ok : true, 
                 sensor : "Mlx906", 
                 ambiTemp : obj[0].trim(),
