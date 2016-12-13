@@ -26,12 +26,12 @@ module.exports = function getSdp610Reading(callback) {
 	    }  
 	    //console.log(objason);
 	    callback(null, objason, "Sdp610");
-           
-            console.log("sdp610******************************reding ok" , reading.trim());
+            //console.log("sdp610******************************reding ok" , reading.trim());
         }
     });
     
     child.stderr.on('data', function (data) {
+	console.log('sdp610 err data---: ' + data);
         fs.appendFile('/home/pi/projects/mqtt_reader/pi_reader/errorLog.txt', 'sdp610 err data: ' + data, function (err) {
         });
         console.log('sdp610 err data---: ' + data);
