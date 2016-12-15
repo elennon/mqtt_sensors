@@ -54,8 +54,10 @@ server.on('published', function(packet, client) {
         case "Sdp610":
             collection = db.get('Sdp610');   
             break;
-        case "WeatherStation":
-            collection = db.get('WeatherStation');   
+        case "WeatherStation":                                                                                                        Station');   
+            break;
+        case "Pi":
+            collection = db.get('Pi');   
             break;
     } 
     if(collection !== null){
