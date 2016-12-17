@@ -49,8 +49,8 @@ function saveInfo(err, pi){
 	console.log('savnnn info');
 	var jason = JSON.stringify(pi);
 	fs.writeFile('/home/ed/projects/node_js/mqtt_sensors/pi_reader/pi_details.json', jason, 'utf8');
-	handleResult(ull, jason, "Pi")
-	runn(pi);
+	client.publish('Pi', jason);
+	runn(null, pi);
 }
 
 function handleResult(err, result, collection) {
