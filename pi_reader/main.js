@@ -6,6 +6,7 @@ var cavityTemp = require('./models/cavityTemp.js');
 var mlx906 = require('./models/mlx906.js');
 var sdp610 = require('./models/sdp610.js');
 var sht15 = require('./models/sht15.js');
+var getPi = require('./models/getPiInfo.js');
 var suspend = require('suspend');
 var fs = require('fs');
 var memwatch = require('memwatch-next');
@@ -29,6 +30,29 @@ memwatch.on('leak', function(info) {
         console.error('memory leak: ' + info);
 });
 
+function onFileRead(err, data) {  
+    if (err) throw err;
+    var pidetails = JSON.parse(data);
+    console.log(data );
+    console.log('two' );
+    if(data == '{}'){
+		console.log('not  else');
+        getPi(saveInfo);
+    } else {
+		console.log('else');
+		console.log(pidetails);
+        runn(pidetails);
+    }
+}
+
+function saveInfo(err, pi){
+	console.log('savnnn info');
+	var jason = JSON.stringify(pi);
+	fs.writeFile('/home/ed/projects/node_js/mqtt_sensors/pi_reader/pi_details.json', jason, 'utf8');
+	handleResult(ull, jason, "Pi")
+	runn(pi);
+}
+
 function handleResult(err, result, collection) {
     if (err) {
         fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'handleResult error-- error: ' + err, function (err) {
@@ -41,35 +65,43 @@ function handleResult(err, result, collection) {
     console.log('reading #' + counter + '  ... ' + result.sensor);
 }
 
-if (cluster.isMaster) {
-    cluster.fork();
-    cluster.on('exit', function(worker) {
-        console.log('Worker %d died', worker.id);
-        cluster.fork();
-    });
-} else if (cluster.isWorker) { 
+function runn(err, pi) {  
 	setInterval(function(){
-    		suspend(function* () {
-			//sendSdpAvg(handleResult);
-			sdp610(handleResult);
-			yield setTimeout(suspend.resume(), 10000);
-			bmp180(handleResult);
-			yield setTimeout(suspend.resume(), 10000); 
-			//mlx906(handleResult);
-			yield setTimeout(suspend.resume(), 10000); 
-			hflux(handleResult);
-			yield setTimeout(suspend.resume(), 10000);
-			cavityTemp(handleResult);
-			yield setTimeout(suspend.resume(), 10000);
-			sht15(handleResult);
-	    	})();
-	    	counter++;
-	}, 1* 60000);
-    	console.log('Worker %d running!', cluster.worker.id);
-    	process.on('exit', function() {
-      		console.log('Handled the exception here');
-      		process.exit(1);
-    	});
+			suspend(function* () {
+		// //sendSdpAvg(handleResult);
+		// sdp610(handleResult);
+		// yield setTimeout(suspend.resume(), 10000);
+		// bmp180(handleResult);
+		// yield setTimeout(suspend.resume(), 10000); 
+		// //mlx906(handleResult);
+		// yield setTimeout(suspend.resume(), 10000); 
+		// hflux(handleResult);
+		// yield setTimeout(suspend.resume(), 10000);
+		// cavityTemp(handleResult);
+		// yield setTimeout(suspend.resume(), 10000);
+		// sht15(handleResult);
+		console.log('mc55' + pi.name)
+		})();
+		
+		counter++;
+	}, 1* 1000);
+	console.log('Worker %d running!', cluster.worker.id);
+	process.on('exit', function() {
+		console.log('Handled the exception here');
+		process.exit(1);
+	});
+}
+
+console.log('runnnnn');
+if (cluster.isMaster) {
+	cluster.fork();
+	cluster.on('exit', function(worker) {
+		console.log('Worker %d died', worker.id);
+		cluster.fork();
+	});
+} else if (cluster.isWorker) { 
+	console.log('one');
+	fs.readFile('/home/ed/projects/node_js/mqtt_sensors/pi_reader/pi_details.json', 'utf8', onFileRead);
 }
 
 client.on('error', function (error) {
