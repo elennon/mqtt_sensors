@@ -1,5 +1,6 @@
 var prompt = require('prompt');
 var fs = require('fs');
+const uuid = require('node-uuid');
 
 module.exports = function getPi(callback) {
     console.log('in getPi')
@@ -9,7 +10,7 @@ module.exports = function getPi(callback) {
         if (err) { return onErr(err); }
         var pi = { 
             createdAt : Date.now(), 
-            id : '666', 
+            id : uuid.v4(), 
             name : result.name, 
             description : result.description, 
             group : result.group

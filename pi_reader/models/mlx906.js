@@ -2,7 +2,7 @@ var uuid = require('node-uuid');
 const exec = require('child_process').exec;
 var fs = require('fs');
 
-module.exports = function getMlx906Reading(callback) {
+module.exports = function getMlx906Reading(pi, callback) {
     var reading;
     exec('sudo /home/pi/projects/mqtt_sensors/pi_reader/scripts/eye2c', (error, stdout, stderr) => {
         if (error) {
@@ -21,7 +21,7 @@ module.exports = function getMlx906Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "east wall", 
+                ip : pi.id, 
                 ok : true, 
                 sensor : "Mlx906", 
                 ambiTemp : obj[0].trim(),

@@ -3,7 +3,8 @@ const spawn = require('child_process').spawn;
 var sudo = require('sudo');
 var fs = require('fs');
 
-module.exports = function getSdp610Reading(callback) {
+module.exports = function getSdp610Reading(pi, callback) {
+    console.log('in sdpp' + pi);
     var options = {
         cachePassword: true,
         prompt: 'elephants',
@@ -19,7 +20,7 @@ module.exports = function getSdp610Reading(callback) {
 	    var objason = { 
 	    createdAt : Date.now(), 
 	        id : uuid.v4(), 
-	        ip : "east wall", 
+	        ip : pi.id, 
 	        ok : true, 
 	        sensor : "Sdp610", 
 		val : reading.trim()

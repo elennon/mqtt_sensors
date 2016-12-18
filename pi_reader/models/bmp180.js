@@ -2,7 +2,7 @@ const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
 var fs = require('fs');
 
-module.exports = function getBmp180Reading(callback) {
+module.exports = function getBmp180Reading(pi, callback) {
     let reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/adaBmp.py']);
 
@@ -13,8 +13,7 @@ module.exports = function getBmp180Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "east wall", 
-                message : "xvvxvx",
+                ip : pi.id, 
                 ok : true, 
                 sensor : "Bmp180", 
                 temp : obj.temp,

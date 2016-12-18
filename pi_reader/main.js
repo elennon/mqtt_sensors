@@ -21,8 +21,6 @@ var options = {
 };
 var client = mqtt.connect('mqtt://139.59.172.240', options);
 console.log('process:-->   ', process.pid);
-//sdp610(handleResult);
-//sht15(handleResult);
 
 memwatch.on('leak', function(info) {
     fs.appendFile('/home/pi/projects/mqtt_sensors/pi_reader/errorLog.txt', 'memory leak -- info: ' + leak, function (err) {
@@ -33,22 +31,18 @@ memwatch.on('leak', function(info) {
 function onFileRead(err, data) {  
     if (err) throw err;
     var pidetails = JSON.parse(data);
-    console.log(data );
-    console.log('two' );
     if(data == '{}'){
-		console.log('not  else');
+	console.log('********** need to get pi info');
         getPi(saveInfo);
     } else {
-		console.log('else');
-		console.log(pidetails);
-        runn(pidetails);
+	console.log('********** have pi info');
+        runn(null, pidetails);
     }
 }
 
 function saveInfo(err, pi){
-	console.log('savnnn info');
 	var jason = JSON.stringify(pi);
-	fs.writeFile('/home/ed/projects/node_js/mqtt_sensors/pi_reader/pi_details.json', jason, 'utf8');
+	fs.writeFile('/home/pi/projects/mqtt_sensors/pi_reader/pi_details.json', jason, 'utf8');
 	client.publish('Pi', jason);
 	runn(null, pi);
 }
@@ -62,37 +56,37 @@ function handleResult(err, result, collection) {
     }
     //console.log(collection + '.......................' + JSON.stringify(result));
     client.publish(collection, JSON.stringify(result));
+    console.log(JSON.stringify(result));
     console.log('reading #' + counter + '  ... ' + result.sensor);
 }
 
-function runn(err, pi) {  
+function runn(err, pi) {
+	console.log('********** starting reads');
+        //console.log(pi);
 	setInterval(function(){
-			suspend(function* () {
-		// //sendSdpAvg(handleResult);
-		// sdp610(handleResult);
-		// yield setTimeout(suspend.resume(), 10000);
-		// bmp180(handleResult);
-		// yield setTimeout(suspend.resume(), 10000); 
-		// //mlx906(handleResult);
-		// yield setTimeout(suspend.resume(), 10000); 
-		// hflux(handleResult);
-		// yield setTimeout(suspend.resume(), 10000);
-		// cavityTemp(handleResult);
-		// yield setTimeout(suspend.resume(), 10000);
-		// sht15(handleResult);
-		console.log('mc55' + pi.name)
-		})();
-		
+		suspend(function* () {
+			// //sendSdpAvg(handleResult);
+			sdp610(pi, handleResult);
+			yield setTimeout(suspend.resume(), 10000);
+			bmp180(pi, handleResult);
+			yield setTimeout(suspend.resume(), 10000); 
+			//mlx906(pi, handleResult);
+			yield setTimeout(suspend.resume(), 10000); 
+			hflux(pi, handleResult);
+			yield setTimeout(suspend.resume(), 10000);
+			cavityTemp(pi, handleResult);
+			yield setTimeout(suspend.resume(), 10000);
+			sht15(pi, handleResult);
+		})();		
 		counter++;
-	}, 1* 1000);
+	}, 1* 60000);
 	console.log('Worker %d running!', cluster.worker.id);
-	process.on('exit', function() {
-		console.log('Handled the exception here');
+	process.on('exit', function(err) {
+		console.log('error: ' + err);
 		process.exit(1);
 	});
 }
 
-console.log('runnnnn');
 if (cluster.isMaster) {
 	cluster.fork();
 	cluster.on('exit', function(worker) {
@@ -100,8 +94,8 @@ if (cluster.isMaster) {
 		cluster.fork();
 	});
 } else if (cluster.isWorker) { 
-	console.log('one');
-	fs.readFile('/home/ed/projects/node_js/mqtt_sensors/pi_reader/pi_details.json', 'utf8', onFileRead);
+	console.log('********** reading pi details file');
+	fs.readFile('/home/pi/projects/mqtt_sensors/pi_reader/pi_details.json', 'utf8', onFileRead);
 }
 
 client.on('error', function (error) {

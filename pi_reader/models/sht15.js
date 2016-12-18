@@ -2,7 +2,7 @@ const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
 var fs = require('fs');
 
-module.exports = function getSht15Reading(callback) {
+module.exports = function getSht15Reading(pi, callback) {
     let reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/sht.py', '-v', '-trd', '4', '17']);
 
@@ -23,7 +23,7 @@ module.exports = function getSht15Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "east wall", 
+                ip : pi.id, 
                 ok : true, 
                 sensor : "Sht15", 
                 temperature : temp,
