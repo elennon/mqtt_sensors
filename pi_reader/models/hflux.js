@@ -2,7 +2,7 @@ const uuid = require('node-uuid');
 const spawn = require('child_process').spawn;
 var fs = require('fs');
 
-module.exports = function getMlx906Reading(callback) {
+module.exports = function getMlx906Reading(pi, callback) {
     let reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/hflux.py']);
     
@@ -13,7 +13,7 @@ module.exports = function getMlx906Reading(callback) {
             var objason = { 
                 createdAt : Date.now(), 
                 id : uuid.v4(), 
-                ip : "east wall", 
+                ip : pi.id, 
                 ok : true, 
                 sensor : "Hflux", 
                 val : obj.val
