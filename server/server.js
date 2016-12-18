@@ -60,6 +60,9 @@ server.on('published', function(packet, client) {
         case "Pi":
             collection = db.get('Pi');   
             break;
+        case "Building":
+            collection = db.get('Building');   
+            break;
     } 
     if(collection !== null){
         collection.insert(JSON.parse(packet.payload), function (err, doc) {
