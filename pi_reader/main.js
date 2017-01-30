@@ -31,7 +31,8 @@ memwatch.on('leak', function(info) {
 function onFileRead(err, data) {  
     if (err) throw err;
     var pidetails = JSON.parse(data);
-    if(data == '{}'){
+    console.log('------------------' + pidetails);
+    if(!pidetails.name || pidetails.name == ""){
 	console.log('********** need to get pi info');
         getPi(saveInfo);
     } else {
@@ -72,7 +73,7 @@ function runn(err, pi) {
 			yield setTimeout(suspend.resume(), 10000); 
 			//mlx906(pi, handleResult);
 			yield setTimeout(suspend.resume(), 10000); 
-			hflux(pi, handleResult);
+			//hflux(pi, handleResult);
 			yield setTimeout(suspend.resume(), 10000);
 			cavityTemp(pi, handleResult);
 			yield setTimeout(suspend.resume(), 10000);

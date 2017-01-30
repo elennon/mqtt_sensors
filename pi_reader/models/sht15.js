@@ -7,17 +7,15 @@ module.exports = function getSht15Reading(pi, callback) {
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/sht.py', '-v', '-trd', '4', '17']);
 
     child.stdout.on('data', function (data) {
-        reading = data.toString();   
+        reading = data.toString();
         if(reading){
             var lines = reading.split('\n');
             for (var i = 0; i < lines.length; i ++){
                 switch(lines[i].split(':')[0]){
-                    case 'temperature' :
-                        var temp = lines[i].split(':')[1];
+                    case 'temp' :
+                        var temp = lines[i].split(':')[1].trim();
                     case 'rh' :
-                        var rh = lines[i].split(':')[1];
-                    case 'dew_point' :
-                        var dp = lines[i].split(':')[1];
+                        var rh = lines[i].split(':')[1].trim();
                 }
             }
             var objason = { 
@@ -27,8 +25,7 @@ module.exports = function getSht15Reading(pi, callback) {
                 ok : true, 
                 sensor : "Sht15", 
                 temperature : temp,
-                rh : rh,
-                dew_point : dp         
+                rh : rh
             } 
             //console.log(objason);
             callback(null, objason, "Sht15");
