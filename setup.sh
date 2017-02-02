@@ -20,11 +20,17 @@ sudo apt-get update && sudo apt-get install git && echo 'done update' && wget ht
 sudo apt-get install build-essential libssl-dev && curl https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash && source ~/.profile;
     
 #npm
-sudo npm install npm@latest -g && nvm install v7.2.1 && echo 'done npm/nvm';
+sudo npm install npm@latest -g && nvm install v7.2.1 && nvm use v7.2.1 && echo 'done npm/nvm';
     
-
 # python
-sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential && echo 'all done first python' && sudo pip install w1thermsensor && sudo pip install paho-mqtt && sudo pip install sht-sensor
+sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential && echo 'all done first python' && sudo pip install w1thermsensor && sudo pip install paho-mqtt && sudo pip install sht-sensor;
+
+git clone https://github.com/adafruit/Adafruit_Python_BMP.git &&
+cd Adafruit_Python_BMP &&
+sudo python setup.py install;
+
+sudo apt-get install apache2 && sudo apt-get install php5;
+
 
 #sudo gedit  /boot/config.txt
 #dtparam=i2c_arm=on

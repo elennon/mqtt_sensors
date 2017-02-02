@@ -4,21 +4,22 @@ var sudo = require('sudo');
 var fs = require('fs');
 
 module.exports = function getSdp610Reading(pi, callback) {
-    console.log('in sdpp' + pi);
+    console.log('in sdp' + pi);
     var options = {
         cachePassword: true,
-        prompt: 'elephants',
+        prompt: 'raspberry',
         spawnOptions: { /* other options for spawn */ }
     };
     var child = sudo([ 'php', '/home/pi/projects/mqtt_sensors/pi_reader/scripts/sdp.php' ], options);
-    let reading;
+    var reading;
     //const child = spawn('php', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php']);
 
-    child.stdout.on('data', function (data) {       
+    child.stdout.on('data', function (data) { 
         reading = data.toString();
+        //console.log("£££$£$" + reading);    
         if(reading){
 	    var objason = { 
-	    createdAt : Date.now(), 
+	        createdAt : Date.now(), 
 	        id : uuid.v4(), 
 	        ip : pi.id, 
 	        ok : true, 
@@ -44,5 +45,5 @@ module.exports = function getSdp610Reading(pi, callback) {
 
     setTimeout(function () {
         child.kill();
-    }, 1000);
+    }, 6000);
 }

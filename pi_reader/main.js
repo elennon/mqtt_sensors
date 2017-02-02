@@ -31,7 +31,6 @@ memwatch.on('leak', function(info) {
 function onFileRead(err, data) {  
     if (err) throw err;
     var pidetails = JSON.parse(data);
-    console.log('------------------' + pidetails);
     if(!pidetails.name || pidetails.name == ""){
 	console.log('********** need to get pi info');
         getPi(saveInfo);
@@ -57,12 +56,13 @@ function handleResult(err, result, collection) {
     }
     //console.log(collection + '.......................' + JSON.stringify(result));
     client.publish(collection, JSON.stringify(result));
-    console.log(JSON.stringify(result));
+    //console.log(JSON.stringify(result));
     console.log('reading #' + counter + '  ... ' + result.sensor);
 }
 
 function runn(err, pi) {
 	console.log('********** starting reads');
+	sdp610(pi, handleResult);
         //console.log(pi);
 	setInterval(function(){
 		suspend(function* () {

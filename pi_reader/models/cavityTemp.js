@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn;
 var fs = require('fs');
 
 module.exports = function getCTReading(pi, callback) {
-    let reading;
+    var reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/getcps.py']);
     
     child.stdout.on('data', function (data) {       

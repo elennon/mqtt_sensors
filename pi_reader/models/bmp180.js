@@ -3,7 +3,7 @@ const spawn = require('child_process').spawn;
 var fs = require('fs');
 
 module.exports = function getBmp180Reading(pi, callback) {
-    let reading;
+    var reading;
     const child = spawn('python', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/adaBmp.py']);
 
     child.stdout.on('data', function (data) {       
