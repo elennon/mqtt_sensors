@@ -4,10 +4,10 @@ var sudo = require('sudo');
 var fs = require('fs');
 
 module.exports = function getSdp610Reading(pi, callback) {
-    console.log('in sdp' + pi);
+ 
     var options = {
         cachePassword: true,
-        prompt: 'raspberry',
+        prompt: 'mice',
         spawnOptions: { /* other options for spawn */ }
     };
     var child = sudo([ 'php', '/home/pi/projects/mqtt_sensors/pi_reader/scripts/sdp.php' ], options);
