@@ -62,7 +62,6 @@ function handleResult(err, result, collection) {
 
 function runn(err, pi) {
 	console.log('********** starting reads');
-	sdp610(pi, handleResult);
         //console.log(pi);
 	setInterval(function(){
 		suspend(function* () {
