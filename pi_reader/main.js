@@ -65,8 +65,7 @@ function runn(err, pi) {
         //console.log(pi);
 	setInterval(function(){
 		suspend(function* () {
-			// //sendSdpAvg(handleResult);
-			sdp610(pi, handleResult);
+			sht15(pi, handleResult);		
 			yield setTimeout(suspend.resume(), 10000);
 			bmp180(pi, handleResult);
 			yield setTimeout(suspend.resume(), 10000); 
@@ -76,7 +75,7 @@ function runn(err, pi) {
 			yield setTimeout(suspend.resume(), 10000);
 			cavityTemp(pi, handleResult);
 			yield setTimeout(suspend.resume(), 10000);
-			sht15(pi, handleResult);
+			sdp610(pi, handleResult);
 		})();		
 		counter++;
 	}, 1* 60000);

@@ -32,6 +32,8 @@ sudo python setup.py install;
 sudo apt-get install apache2 && sudo apt-get install php5;
 
 
+sudo apt-get install gedit;
+
 #sudo gedit  /boot/config.txt
 #dtparam=i2c_arm=on
 #dtparam=i2c1=on
