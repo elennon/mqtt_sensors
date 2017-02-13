@@ -25,9 +25,7 @@ sudo npm install npm@latest -g && nvm install v7.2.1 && nvm use v7.2.1 && echo '
 # python
 sudo apt-get install -y python-smbus i2c-tools libi2c-dev python-rpi.gpio python3-rpi.gpio python-dev libglib2.0-dev python-pip build-essential && echo 'all done first python' && sudo pip install w1thermsensor && sudo pip install paho-mqtt && sudo pip install sht-sensor;
 
-git clone https://github.com/adafruit/Adafruit_Python_BMP.git &&
-cd Adafruit_Python_BMP &&
-sudo python setup.py install;
+git clone https://github.com/adafruit/Adafruit_Python_BMP.git && cd Adafruit_Python_BMP && sudo python setup.py install && sudo pip install adafruit-ads1x15;
 
 sudo apt-get install apache2 && sudo apt-get install php5;
 

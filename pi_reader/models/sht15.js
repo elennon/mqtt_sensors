@@ -43,5 +43,5 @@ module.exports = function getSht15Reading(pi, callback) {
 
     setTimeout(function () {
         child.kill();
-    }, 1500);
+    }, 3000);
 }
