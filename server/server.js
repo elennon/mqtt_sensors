@@ -68,6 +68,8 @@ server.on('published', function(packet, client) {
         var rd = JSON.parse(packet.payload);
         if(packet.topic !== "WeatherStation"){
             rd.createdAt = Date.now();
+        } else if (packet.topic === "WeatherStation"){
+            rd.time = Date.now();
         }
         collection.insert(rd, function (err, doc) {
             if (err) {
