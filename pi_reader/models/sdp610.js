@@ -7,16 +7,15 @@ module.exports = function getSdp610Reading(pi, callback) {
  
     var options = {
         cachePassword: true,
-        prompt: 'mice',
+        prompt: 'raspberry',
         spawnOptions: { /* other options for spawn */ }
     };
-    var child = sudo([ 'php', '/home/pi/projects/mqtt_sensors/pi_reader/scripts/sdp.php' ], options);
+    //var child = sudo([ 'php', '/home/pi/projects/mqtt_sensors/pi_reader/scripts/sdp.php' ], options);
     var reading;
-    //const child = spawn('php', ['/home/pi/projects/mqtt_reader/pi_reader/scripts/sdp.php']);
-
+    
+    const child = spawn('php', ['/home/pi/projects/mqtt_sensors/pi_reader/scripts/sdp.php']);
     child.stdout.on('data', function (data) { 
         reading = data.toString();
-        //console.log("£££$£$" + reading);    
         if(reading){
 	    var objason = { 
 	        createdAt : Date.now(), 
@@ -25,8 +24,7 @@ module.exports = function getSdp610Reading(pi, callback) {
 	        ok : true, 
 	        sensor : "Sdp610", 
 		val : reading.trim()
-	    }  
-	    //console.log(objason);
+	    }
 	    callback(null, objason, "Sdp610");
             //console.log("sdp610******************************reding ok" , reading.trim());
         }
@@ -45,5 +43,5 @@ module.exports = function getSdp610Reading(pi, callback) {
 
     setTimeout(function () {
         child.kill();
-    }, 6000);
+    }, 5000);
 }
