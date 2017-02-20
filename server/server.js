@@ -1,6 +1,7 @@
 var mosca = require('mosca')
 var monk = require('monk');
 var db = monk('localhost:27017/Measurements');
+var moment = require('moment')
 
 var pubsubsettings = {
       type: 'mongo',
@@ -69,7 +70,7 @@ server.on('published', function(packet, client) {
         if(packet.topic !== "WeatherStation"){
             rd.createdAt = Date.now();
         } else if (packet.topic === "WeatherStation"){
-            rd.time = Date.now();
+            rd.time = moment().format();
         }
         collection.insert(rd, function (err, doc) {
             if (err) {
