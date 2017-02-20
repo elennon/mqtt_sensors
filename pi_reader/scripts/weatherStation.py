@@ -53,7 +53,7 @@ while 1:
                                     "wind_direction" : resp[1],
                                     "wind_speed" : resp[2],
                                     "corrected_direction" : resp[3],
-                                    "pressure" : resp[4],
+                                    "pressure" : parseFloat(resp[4]) * 133.322365,
                                     "rh%" : resp[5],
                                     "temp" : resp[6],
                                     "dew_point" : resp[7],

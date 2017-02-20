@@ -65,7 +65,11 @@ server.on('published', function(packet, client) {
             break;
     } 
     if(collection !== null){
-        collection.insert(JSON.parse(packet.payload), function (err, doc) {
+        var rd = JSON.parse(packet.payload);
+        if(packet.topic !== "WeatherStation"){
+            rd.createdAt = Date.now();
+        }
+        collection.insert(rd, function (err, doc) {
             if (err) {
                 // If it failed, return error
                 console.log("There was a problem adding the information to the database.");
